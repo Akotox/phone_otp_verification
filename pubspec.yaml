@@ -1,7 +1,7 @@
 name: phone_otp_verification
 description: This Flutter package is a comprehensive solution designed for applications requiring country selection with phone codes and OTP (One-Time Password) verification. It offers a seamless and efficient user experience with an array of customizable features, making it an ideal choice for any Flutter application that needs robust authentication and country selection functionality.
 version: 1.0.0
-homepage: https://github.com/Akotox/phone_otp_verification
+homepage: https://github.com/Akotox/phone_otp_verification.git
 
 environment:
   sdk: '>=3.1.1 <4.0.0'
