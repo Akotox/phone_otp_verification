@@ -49,7 +49,21 @@ dependencies:
 
 import 'package:phone_otp_verification/phone_verification.dart';
 
-// Example usage code here
+// Minimal usage code here
+
+```dart
+    PhoneVerification(
+      isFirstPage: true,
+      onSend: (String value) {
+        print('Phone number: $value');
+      },
+      onVerification: (String value) {
+        print('OTP: $value');
+      },
+    )
+```
+
+// Custom usage code here
 
 ```dart
     PhoneVerification(
@@ -71,7 +85,7 @@ import 'package:phone_otp_verification/phone_verification.dart';
 
 Our Flutter Country Picker & OTP Verification Package is designed to streamline the process of implementing country selection and OTP verification in your Flutter applications. The package is meticulously crafted to ensure ease of use, high performance, and flexibility, making it a valuable addition to a wide range of Flutter projects.
 
-To learn more about the package, explore its features, and understand its capabilities in depth, please visit our [official documentation](LINK_TO_YOUR_DOCUMENTATION). The documentation provides detailed information about each component, along with usage examples and tips for customization.
+To learn more about the package, explore its features, and understand its capabilities in depth, please visit our [official documentation](https://discord.gg/stmfH6pMKK). The documentation provides detailed information about each component, along with usage examples and tips for customization.
 
 ### Contributing
 
@@ -86,7 +100,7 @@ Before contributing, please read our [Contributing Guidelines](LINK_TO_YOUR_CONT
 
 ### Filing Issues
 
-Encountering an issue or have a suggestion? We encourage you to file issues through our GitHub [Issues Page](LINK_TO_YOUR_GITHUB_ISSUES). When filing an issue, please provide the following:
+Encountering an issue or have a suggestion? We encourage you to file issues through our GitHub [Issues Page](https://github.com/Akotox/phone_otp_verification/issues). When filing an issue, please provide the following:
 
 - A clear and descriptive title.
 - A detailed description of the issue or suggestion.
@@ -95,11 +109,11 @@ Encountering an issue or have a suggestion? We encourage you to file issues thro
 
 ### Support and Response
 
-Our team is committed to providing support for the package users. While we strive to respond to issues and pull requests promptly, please allow a reasonable amount of time for a response. For immediate support or specific queries, you can also reach out to us via [official support channel or email](LINK_TO_SUPPORT).
+Our team is committed to providing support for the package users. While we strive to respond to issues and pull requests promptly, please allow a reasonable amount of time for a response. For immediate support or specific queries, you can also reach out to us via [official support channel](https://discord.gg/stmfH6pMKK).
 
 ### Stay Updated
 
-To stay updated with the latest releases, features, and updates, please follow us on [GitHub](LINK_TO_YOUR_GITHUB_PAGE) or subscribe to our newsletter.
+To stay updated with the latest releases, features, and updates, please follow us on [GitHub](https://github.com/WilinxGroup) or subscribe to our newsletter.
 
 We appreciate your interest in our package and look forward to your valuable contributions and feedback!
 
