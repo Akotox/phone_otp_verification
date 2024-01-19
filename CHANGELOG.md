@@ -32,3 +32,4 @@ We're thrilled to introduce the first release of our Flutter package, version 1.
 
 - **Opt Text Color Change:** Enables users to effortlessly switch between light mode and dark mode.
 
+- **Customizable Opt Text:** Enables users to brand there app with easy.
