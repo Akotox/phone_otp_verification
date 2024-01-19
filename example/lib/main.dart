@@ -37,6 +37,12 @@ class _HomePageState extends State<HomePage> {
       enableLogo: false,
       themeColor: Colors.blueAccent,
       backgroundColor: Colors.black,
+      initialPageText: "Verify Phone Number",
+      initialPageTextStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
       textColor: Colors.white,
       onSend: (String value) {
         print('Phone number: $value');

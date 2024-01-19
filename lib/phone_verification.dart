@@ -20,12 +20,15 @@ class PhoneVerification extends StatefulWidget {
       required this.onVerification,
       this.resend,
       this.otpTitleText,
-      this.style});
+      this.style,
+      this.initialPageText,
+      this.initialPageTextStyle});
   final Widget? otpVerificationWidget;
   final bool isFirstPage;
   final bool? enableLogo;
   final String? logoPath;
   final String? otpTitleText;
+  final String? initialPageText;
   final Color? themeColor;
   final Color? backgroundColor;
   final Color? textColor;
@@ -34,6 +37,7 @@ class PhoneVerification extends StatefulWidget {
   final ValueChanged<String> onSend;
   final ValueChanged<String> onVerification;
   final TextStyle? style;
+  final TextStyle? initialPageTextStyle;
   @override
   State<PhoneVerification> createState() => _PhoneVerificationState();
 }
@@ -120,7 +124,7 @@ class _PhoneVerificationState extends State<PhoneVerification> {
           leading: GestureDetector(
             onTap: () {
               if (pageIndex == 0) {
-                !widget.isFirstPage ? Navigator.pop(context) : () {};
+                !widget.isFirstPage ? Navigator.pop(context) : null;
               } else {
                 setState(() {
                   pageIndex = 0;
@@ -189,9 +193,11 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                       : const SizedBox(height: 30),
                   Center(
                       child: Text(
-                    'Login Via Phone Number',
-                    style: TextStyle(
-                        fontSize: 16, color: widget.textColor ?? Colors.black),
+                    widget.initialPageText ?? 'Login Via Phone Number',
+                    style: widget.initialPageTextStyle ??
+                        TextStyle(
+                            fontSize: 16,
+                            color: widget.textColor ?? Colors.black),
                   )),
                   const SizedBox(height: 50),
                   GestureDetector(

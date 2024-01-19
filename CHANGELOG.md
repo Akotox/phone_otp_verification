@@ -43,3 +43,14 @@ We're thrilled to release, version 1.0.2. This initial launch brings a specializ
 ### Features
 
 - **Changable Otp Button theme support:** Enables users to effortlessly change the button theme to have a uniform app.
+
+
+## 1.0.3 - Customizable First Page Text
+
+**Release date:** [19 January 2024]
+
+We're thrilled to release, version 1.0.3. This initial launch brings a specialized solution for integrating country selection with phone codes and OTP (One-Time Password) verification functionalities in Flutter apps.
+
+### Features
+
+- **CCustomizable First Page Text:** Enables users to brand applications with easy.
