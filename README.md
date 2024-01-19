@@ -42,7 +42,7 @@ To use this package in your Flutter project, add the following dependency to you
 
 ```yaml
 dependencies:
-  phone_otp_verification: ^1.0.0
+  phone_otp_verification: ^1.0.2
 ```
 
 ## Usage

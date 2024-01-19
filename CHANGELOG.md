@@ -22,14 +22,24 @@ We're thrilled to introduce the first release of our Flutter package, version 1.
 
 - **Regular Updates:** Committed to continuous improvement, the package will receive regular updates for new features, security enhancements, and Flutter compatibility.
 
-## 1.0.1 - Initial Release
+## 1.0.1 - Brandable Otp Text 
 
 **Release date:** [19 January 2024]
 
-We're thrilled to introduce the first release of our Flutter package, version 1.0.0. This initial launch brings a specialized solution for integrating country selection with phone codes and OTP (One-Time Password) verification functionalities in Flutter apps.
+We're thrilled to release, version 1.0.1. This initial launch brings a specialized solution for integrating country selection with phone codes and OTP (One-Time Password) verification functionalities in Flutter apps.
 
 ### Features
 
 - **Opt Text Color Change:** Enables users to effortlessly switch between light mode and dark mode.
 
 - **Customizable Opt Text:** Enables users to brand there app with easy.
+
+## 1.0.2 - Changable Otp Button theme support
+
+**Release date:** [19 January 2024]
+
+We're thrilled to release, version 1.0.2. This initial launch brings a specialized solution for integrating country selection with phone codes and OTP (One-Time Password) verification functionalities in Flutter apps.
+
+### Features
+
+- **Changable Otp Button theme support:** Enables users to effortlessly change the button theme to have a uniform app.

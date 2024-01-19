@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
     return PhoneVerification(
       isFirstPage: true,
       enableLogo: false,
-      themeColor: Colors.green,
+      themeColor: Colors.blueAccent,
       backgroundColor: Colors.black,
       textColor: Colors.white,
       onSend: (String value) {

@@ -414,7 +414,7 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                             decoration: BoxDecoration(
                               color: verificationCode != null &&
                                       verificationCode!.length == 6
-                                  ? Colors.green.shade600
+                                  ? widget.themeColor ?? Colors.green.shade600
                                   : Colors.grey.shade400,
                               borderRadius: BorderRadius.circular(10),
                             ),
