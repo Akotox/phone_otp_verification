@@ -96,7 +96,7 @@ We openly welcome contributions from the developer community. Whether it's impro
 3. Make your changes in the branch.
 4. Submit a pull request with a clear description of the improvements.
 
-Before contributing, please read our [Contributing Guidelines](LINK_TO_YOUR_CONTRIBUTING_GUIDE) for more details on the process and coding standards.
+Before contributing, please read our [Contributing Guidelines](https://discord.gg/stmfH6pMKK) for more details on the process and coding standards.
 
 ### Filing Issues
 
