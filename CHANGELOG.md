@@ -22,4 +22,13 @@ We're thrilled to introduce the first release of our Flutter package, version 1.
 
 - **Regular Updates:** Committed to continuous improvement, the package will receive regular updates for new features, security enhancements, and Flutter compatibility.
 
+## 1.0.1 - Initial Release
+
+**Release date:** [19 January 2024]
+
+We're thrilled to introduce the first release of our Flutter package, version 1.0.0. This initial launch brings a specialized solution for integrating country selection with phone codes and OTP (One-Time Password) verification functionalities in Flutter apps.
+
+### Features
+
+- **Opt Text Color Change:** Enables users to effortlessly switch between light mode and dark mode.
 

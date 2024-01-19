@@ -36,6 +36,8 @@ class _HomePageState extends State<HomePage> {
       isFirstPage: true,
       enableLogo: false,
       themeColor: Colors.green,
+      backgroundColor: Colors.black,
+      textColor: Colors.white,
       onSend: (String value) {
         print('Phone number: $value');
       },

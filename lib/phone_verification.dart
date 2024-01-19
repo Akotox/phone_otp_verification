@@ -18,7 +18,9 @@ class PhoneVerification extends StatefulWidget {
       this.hintColor,
       required this.onSend,
       required this.onVerification,
-      this.resend, this.otpTitleText});
+      this.resend,
+      this.otpTitleText,
+      this.style});
   final Widget? otpVerificationWidget;
   final bool isFirstPage;
   final bool? enableLogo;
@@ -31,6 +33,7 @@ class PhoneVerification extends StatefulWidget {
   final Widget? resend;
   final ValueChanged<String> onSend;
   final ValueChanged<String> onVerification;
+  final TextStyle? style;
   @override
   State<PhoneVerification> createState() => _PhoneVerificationState();
 }
@@ -352,15 +355,15 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                                         ),
                                 )),
                         const SizedBox(height: 30),
-                         Center(
-                          child: Text(widget.otpTitleText??"Enter Your Code",
-                              style:  TextStyle(
-                                  fontSize: 20,
-                                  color: widget.themeColor??Colors.green,
-                                  fontWeight: FontWeight.bold)),
+                        Center(
+                          child: Text(widget.otpTitleText ?? "Enter Your Code",
+                              style: widget.style ??
+                                  TextStyle(
+                                      fontSize: 20,
+                                      color: widget.themeColor ?? Colors.green,
+                                      fontWeight: FontWeight.bold)),
                         ),
-                        const SizedBox(height: 10),
-
+                        const SizedBox(height: 30),
                         const Text(
                             "Enter the code sent to your phone number, if you did not send recieve the code, click resend",
                             style: TextStyle(
@@ -374,10 +377,10 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                           numberOfFields: 6,
                           borderColor: Colors.grey,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          focusedBorderColor: widget.themeColor??Colors.green,
-                          textStyle: const TextStyle(
+                          focusedBorderColor: widget.themeColor ?? Colors.green,
+                          textStyle: TextStyle(
                               fontSize: 16,
-                              color: Colors.black,
+                              color: widget.textColor ?? Colors.black,
                               fontWeight: FontWeight.bold),
                           showFieldAsBox: false,
                           borderWidth: 2.0,
