@@ -44,7 +44,6 @@ class PhoneVerification extends StatefulWidget {
 
 class _PhoneVerificationState extends State<PhoneVerification> {
   final PageController controller = PageController(initialPage: 0);
-  late final ScrollController scrollController;
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController searchQuery = TextEditingController();
   int pageIndex = 0;
@@ -60,19 +59,11 @@ class _PhoneVerificationState extends State<PhoneVerification> {
 
   Map<String, List<Country>> allCountries = groupCountries(countries);
   @override
-  void initState() {
-    scrollController = ScrollController();
-    super.initState();
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-    scrollController.jumpTo(0.0);
-  });
-    
-  }
+ 
 
   @override
   void dispose() {
     controller.dispose();
-    scrollController.dispose();
     super.dispose();
   }
 
@@ -91,7 +82,9 @@ class _PhoneVerificationState extends State<PhoneVerification> {
 
   @override
   Widget build(BuildContext context) {
-    
+  //         WidgetsBinding.instance.addPostFrameCallback((_) {
+  //   scrollController.jumpTo(0.0);
+  // });
     return Scaffold(
         backgroundColor: widget.backgroundColor ?? Colors.white,
         appBar: AppBar(
@@ -473,7 +466,6 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: ListView.builder(
-                      controller: scrollController,
                       itemCount: searchResults.length,
                       itemBuilder: (context, index) {
                         Country pickedCountry = searchResults[index];
@@ -486,7 +478,7 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                               country = pickedCountry;
                               pageIndex = 0;
                             });
-                            if (scrollController.hasClients && mounted) {
+                            if (controller.hasClients && mounted) {
                               controller.animateToPage(0,
                                   duration: const Duration(milliseconds: 400),
                                   curve: Curves.fastOutSlowIn);
@@ -510,7 +502,6 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: ListView.builder(
-                      controller: scrollController,
                       itemCount: allCountries.values.fold(
                           0,
                           (previousValue, element) =>
