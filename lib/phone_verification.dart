@@ -44,7 +44,7 @@ class PhoneVerification extends StatefulWidget {
 
 class _PhoneVerificationState extends State<PhoneVerification> {
   final PageController controller = PageController(initialPage: 0);
-  final ScrollController scrollController = ScrollController();
+  late final ScrollController scrollController;
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController searchQuery = TextEditingController();
   int pageIndex = 0;
@@ -59,6 +59,11 @@ class _PhoneVerificationState extends State<PhoneVerification> {
   String? verificationCode;
 
   Map<String, List<Country>> allCountries = groupCountries(countries);
+  @override
+  void initState() {
+    super.initState();
+    scrollController = ScrollController();
+  }
 
   @override
   void dispose() {
