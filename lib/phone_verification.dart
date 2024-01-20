@@ -61,10 +61,12 @@ class _PhoneVerificationState extends State<PhoneVerification> {
   Map<String, List<Country>> allCountries = groupCountries(countries);
   @override
   void initState() {
+    scrollController = ScrollController();
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      scrollController.jumpTo(0.0);
-    });
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+    scrollController.jumpTo(0.0);
+  });
+    
   }
 
   @override
@@ -89,6 +91,7 @@ class _PhoneVerificationState extends State<PhoneVerification> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         backgroundColor: widget.backgroundColor ?? Colors.white,
         appBar: AppBar(
