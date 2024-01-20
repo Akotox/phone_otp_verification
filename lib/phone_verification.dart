@@ -62,7 +62,9 @@ class _PhoneVerificationState extends State<PhoneVerification> {
   @override
   void initState() {
     super.initState();
-    scrollController = ScrollController();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      scrollController.jumpTo(0.0);
+    });
   }
 
   @override
@@ -87,15 +89,6 @@ class _PhoneVerificationState extends State<PhoneVerification> {
 
   @override
   Widget build(BuildContext context) {
-     WidgetsBinding.instance.addPostFrameCallback((_) {
-    if (controller.hasClients) {
-      scrollController.animateTo(
-        0,
-        duration: const Duration(milliseconds: 400),
-        curve: Curves.fastOutSlowIn,
-      );
-    }
-  });
     return Scaffold(
         backgroundColor: widget.backgroundColor ?? Colors.white,
         appBar: AppBar(
