@@ -44,6 +44,7 @@ class PhoneVerification extends StatefulWidget {
 
 class _PhoneVerificationState extends State<PhoneVerification> {
   final PageController controller = PageController(initialPage: 0);
+  final ScrollController scrollController = ScrollController();
   final TextEditingController phoneNumber = TextEditingController();
   final TextEditingController searchQuery = TextEditingController();
   int pageIndex = 0;
@@ -62,6 +63,7 @@ class _PhoneVerificationState extends State<PhoneVerification> {
   @override
   void dispose() {
     controller.dispose();
+    scrollController.dispose();
     super.dispose();
   }
 
@@ -123,15 +125,17 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                     ),
           leading: GestureDetector(
             onTap: () {
-              if (pageIndex == 0) {
-                !widget.isFirstPage ? Navigator.pop(context) : null;
+              if (pageIndex == 0 && widget.isFirstPage == true) {
+                Navigator.pop(context);
               } else {
                 setState(() {
                   pageIndex = 0;
                 });
-                controller.animateToPage(0,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeOut);
+                if (controller.hasClients && mounted) {
+                  controller.animateToPage(0,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut);
+                }
               }
             },
             child: pageIndex != 0
@@ -148,6 +152,8 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                       onTap: () {
                         setState(() {
                           search = !search;
+                          searchQuery.clear();
+                          searchResults = [];
                         });
                       },
                       child: Icon(!search ? Icons.search : Icons.close),
@@ -205,9 +211,11 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                       setState(() {
                         pageIndex = 2;
                       });
-                      controller.animateToPage(2,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeOut);
+                      if (controller.hasClients && mounted) {
+                        controller.animateToPage(2,
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.easeIn);
+                      }
                     },
                     child: Row(
                       children: [
@@ -304,9 +312,11 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                         setState(() {
                           pageIndex = 1;
                         });
-                        controller.animateToPage(1,
-                            duration: const Duration(milliseconds: 300),
-                            curve: Curves.easeOut);
+                        if (controller.hasClients && mounted) {
+                          controller.animateToPage(1,
+                              duration: const Duration(milliseconds: 600),
+                              curve: Curves.easeOut);
+                        }
                       }
                     },
                     child: Container(
@@ -329,117 +339,131 @@ class _PhoneVerificationState extends State<PhoneVerification> {
               ),
             ),
             widget.otpVerificationWidget == null
-                ? SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
-                    child: ListView(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      children: [
-                        const SizedBox(
-                          height: 90,
-                        ),
-                        widget.enableLogo == null || widget.enableLogo == false
-                            ? const SizedBox.shrink()
-                            : CircleAvatar(
-                                radius: 50,
-                                backgroundColor: Colors.grey.shade200,
-                                child: ClipRRect(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(50)),
-                                  child: widget.logoPath != null &&
-                                          widget.enableLogo == true
-                                      ? Image(
-                                          image:
-                                              AssetImage(widget.logoPath ?? ''),
-                                          height: 100,
-                                          width: 100,
-                                        )
-                                      : const Icon(
-                                          Icons.image_rounded,
-                                          size: 50,
-                                          color: Colors.green,
-                                        ),
-                                )),
-                        const SizedBox(height: 30),
-                        Center(
-                          child: Text(widget.otpTitleText ?? "Enter Your Code",
-                              style: widget.style ??
-                                  TextStyle(
-                                      fontSize: 20,
-                                      color: widget.themeColor ?? Colors.green,
-                                      fontWeight: FontWeight.bold)),
-                        ),
-                        const SizedBox(height: 30),
-                        const Text(
-                            "Enter the code sent to your phone number, if you did not send recieve the code, click resend",
-                            style: TextStyle(
-                                fontSize: 10,
-                                color: Colors.grey,
-                                fontWeight: FontWeight.normal)),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        OtpTextField(
-                          numberOfFields: 6,
-                          borderColor: Colors.grey,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          focusedBorderColor: widget.themeColor ?? Colors.green,
-                          textStyle: TextStyle(
-                              fontSize: 16,
-                              color: widget.textColor ?? Colors.black,
-                              fontWeight: FontWeight.bold),
-                          showFieldAsBox: false,
-                          borderWidth: 2.0,
-                          onCodeChanged: (String code) {
-                            verificationCode = code;
-                          },
-                          onSubmit: (String code) {
-                            widget.onVerification(code);
-                            setState(() {
-                              verificationCode = code;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        widget.resend == null
-                            ? const SizedBox.shrink()
-                            : widget.resend!,
-                        GestureDetector(
-                          onTap: () {
-                            if (verificationCode == null) {
-                              return;
-                            } else {
-                              widget.onVerification(verificationCode!);
-                            }
-                          },
-                          child: Container(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                              color: verificationCode != null &&
-                                      verificationCode!.length == 6
-                                  ? widget.themeColor ?? Colors.green.shade600
-                                  : Colors.grey.shade400,
-                              borderRadius: BorderRadius.circular(10),
+                ? pageIndex == 1
+                    ? SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        child: ListView(
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          children: [
+                            const SizedBox(
+                              height: 90,
                             ),
-                            child: const Center(
-                                child: Text(
-                              'Verify and Login',
-                              style: TextStyle(color: Colors.white),
-                            )),
-                          ),
-                        )
-                      ],
-                    ),
-                  )
+                            widget.enableLogo == null ||
+                                    widget.enableLogo == false
+                                ? const SizedBox.shrink()
+                                : CircleAvatar(
+                                    radius: 50,
+                                    backgroundColor: Colors.grey.shade200,
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(50)),
+                                      child: widget.logoPath != null &&
+                                              widget.enableLogo == true
+                                          ? Image(
+                                              image: AssetImage(
+                                                  widget.logoPath ?? ''),
+                                              height: 100,
+                                              width: 100,
+                                            )
+                                          : const Icon(
+                                              Icons.image_rounded,
+                                              size: 50,
+                                              color: Colors.green,
+                                            ),
+                                    )),
+                            const SizedBox(height: 30),
+                            Center(
+                              child: Text(
+                                  widget.otpTitleText ?? "Enter Your Code",
+                                  style: widget.style ??
+                                      TextStyle(
+                                          fontSize: 20,
+                                          color:
+                                              widget.themeColor ?? Colors.green,
+                                          fontWeight: FontWeight.bold)),
+                            ),
+                            const SizedBox(height: 30),
+                            const Text(
+                                "Enter the code sent to your phone number, if you did not send recieve the code, click resend",
+                                style: TextStyle(
+                                    fontSize: 10,
+                                    color: Colors.grey,
+                                    fontWeight: FontWeight.normal)),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            OtpTextField(
+                              numberOfFields: 6,
+                              borderColor: Colors.grey,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              focusedBorderColor:
+                                  widget.themeColor ?? Colors.green,
+                              textStyle: TextStyle(
+                                  fontSize: 16,
+                                  color: widget.textColor ?? Colors.black,
+                                  fontWeight: FontWeight.bold),
+                              showFieldAsBox: false,
+                              borderWidth: 2.0,
+                              onCodeChanged: (String code) {},
+                              onSubmit: (String code) {
+                                verificationCode = code;
+                                if (mounted) {
+                                  if (verificationCode == null) {
+                                    return;
+                                  } else {
+                                    widget.onVerification(verificationCode!);
+                                  }
+                                }
+                              },
+                            ),
+                            const SizedBox(
+                              height: 25,
+                            ),
+                            widget.resend == null
+                                ? const SizedBox.shrink()
+                                : widget.resend!,
+                            GestureDetector(
+                              onTap: () {
+                                if (verificationCode == null) {
+                                  return;
+                                } else {
+                                  widget.onVerification(verificationCode!);
+                                }
+                              },
+                              child: Container(
+                                height: 40,
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                  color: verificationCode != null &&
+                                          verificationCode!.length == 6
+                                      ? widget.themeColor ??
+                                          Colors.green.shade600
+                                      : Colors.grey.shade400,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Center(
+                                    child: Text(
+                                  'Verify and Login',
+                                  style: TextStyle(color: Colors.white),
+                                )),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                    : Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height,
+                        color: widget.backgroundColor ?? Colors.white,
+                      )
                 : widget.otpVerificationWidget!,
             searchResults.isNotEmpty
                 ? SizedBox(
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: ListView.builder(
+                      controller: scrollController,
                       itemCount: searchResults.length,
                       itemBuilder: (context, index) {
                         Country pickedCountry = searchResults[index];
@@ -452,9 +476,11 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                               country = pickedCountry;
                               pageIndex = 0;
                             });
-                            controller.animateToPage(0,
-                                duration: const Duration(milliseconds: 400),
-                                curve: Curves.fastOutSlowIn);
+                            if (scrollController.hasClients && mounted) {
+                              controller.animateToPage(0,
+                                  duration: const Duration(milliseconds: 400),
+                                  curve: Curves.fastOutSlowIn);
+                            }
                           },
                           title: Text(
                             pickedCountry.country,
@@ -474,6 +500,7 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                     height: MediaQuery.of(context).size.height,
                     width: MediaQuery.of(context).size.width,
                     child: ListView.builder(
+                      controller: scrollController,
                       itemCount: allCountries.values.fold(
                           0,
                           (previousValue, element) =>
@@ -504,9 +531,13 @@ class _PhoneVerificationState extends State<PhoneVerification> {
                                   country = pickedCountry;
                                   pageIndex = 0;
                                 });
-                                controller.animateToPage(0,
-                                    duration: const Duration(milliseconds: 400),
-                                    curve: Curves.fastOutSlowIn);
+
+                                if (controller.hasClients && mounted) {
+                                  controller.animateToPage(0,
+                                      duration:
+                                          const Duration(milliseconds: 600),
+                                      curve: Curves.fastOutSlowIn);
+                                }
                               },
                               title: Text(
                                 pickedCountry.country,
