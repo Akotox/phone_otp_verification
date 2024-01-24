@@ -38,6 +38,8 @@ This Flutter package is a comprehensive solution designed for applications requi
 
 ## Getting Started
 
+![Tutorial](https://firebasestorage.googleapis.com/v0/b/authenification-25740.appspot.com/o/horizon.png?alt=media&token=5e66c42f-18ec-40c2-8353-9698f3a222be)(https://www.youtube.com/watch?v=icUYAXjOvOw&ab_channel=horizondev)
+
 To use this package in your Flutter project, add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
